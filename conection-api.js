@@ -26,7 +26,7 @@ boton.addEventListener('click', busquedaUltimaSemana);
 
 const fechaActual = document.getElementById("fecha-actual");
 let f = new Date();
-fechaActual.innerHTML += f.getDate()+"/"+(f.getMonth()+1)+"/"+f.getFullYear(); 
+fechaActual.innerHTML += f.getDate().toString().padStart(2, "0") + "/" + (f.getMonth()+1).toString().padStart(2, "0") + "/" + f.getFullYear(); 
 
 
 function busquedaActual(){
@@ -45,10 +45,23 @@ function busquedaActual(){
 function busquedaUltimaSemana(){
 
     // Permite actualizar la cantidad de dias hacia atras que revisamos precios.
-    const margenDiasComparativa = 3;
+    const margenDiasComparativa = 4;
 
     let contenedor = document.getElementById("contenedor-precios-antiguos");
-    contenedor.innerHTML = "";
+    contenedor.innerHTML = `
+            <div class="row">
+              <span class="text-center">Buscando datos...</span> 
+            </div>
+            <div class="row">
+              <span class="text-center">Buscando datos...</span> 
+            </div>
+            <div class="row">
+              <span class="text-center">Buscando datos...</span> 
+            </div>
+            <div class="row">
+              <span class="text-center">Buscando datos...</span> 
+            </div>
+    `;
     
 
     const fechaFinal = new Date();
@@ -72,6 +85,7 @@ function busquedaUltimaSemana(){
         // console.log(response);
         let idReferenciaDivNuevo;
         let elementos = response.data;
+        contenedor.innerHTML = "";
 
         for(let i = elementos.length-1; i >= 0; i--){
 
